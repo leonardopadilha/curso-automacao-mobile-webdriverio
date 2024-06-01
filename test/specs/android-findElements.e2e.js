@@ -28,4 +28,28 @@ describe('Android Element', () => {
         const textAssertion = await $('//android.widget.TextView');
         await expect(textAssertion).toHaveText("You selected: 1 , Command two")
     })
+    it('Find multiple elements', async () => {
+        const expectedList = [
+            'API Demos', "Access'ibility",
+            'Accessibility', 'Animation',
+            'App', 'Content',
+            'Graphics', 'Media',
+            'NFC', 'OS',
+            'Preference', 'Text',
+            'Views'
+        ];
+
+        const actualList = [];
+
+        // find multiple elements
+        const textList = await $$('android.widget.TextView');
+
+        // loop through them
+        for (const element of textList) {
+            actualList.push(await element.getText())
+        }
+
+        // assert the list
+        await expect(actualList).toEqual(expectedList)
+    })
 })
