@@ -52,4 +52,18 @@ describe('Android Element', () => {
         // assert the list
         await expect(actualList).toEqual(expectedList)
     })
+
+    it('Working with text field', async () => {
+        // access the auto complete screen
+        await $('~Views').click()
+        await $('//*[@text="Auto Complete"]').click()
+        await $('//*[@content-desc="1. Screen Top"]').click()
+
+        // enter the country name
+        const textField = await $('//*[@resource-id="io.appium.android.apis:id/edit"]')
+        await textField.addValue('Canada')
+
+        // verify the country name
+        await expect(textField).toHaveText('Canada')
+    })
 })
